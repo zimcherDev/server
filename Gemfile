@@ -53,3 +53,7 @@ group :development do
   gem 'capistrano-rvm'
 end
 
+group :production do
+  gem 'mysql2'
+end
+
