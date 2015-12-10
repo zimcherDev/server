@@ -1,0 +1,2 @@
+module ZimsHelper
+end
