@@ -13,7 +13,8 @@ Rails.application.routes.draw do
     post 'login' => :create
     delete 'logout' => :destroy
   end
-
+  
+  root "users#new"
   resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
