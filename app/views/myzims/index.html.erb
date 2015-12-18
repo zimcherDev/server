@@ -1,2 +1,23 @@
-<h1>Myzims#index</h1>
-<p>Find me in app/views/myzims/index.html.erb</p>
+<h1>Myzims</h1>
+<% if notice %>
+<p id="notice"><%= notice %></p>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @zims.each do |zim| %>
+      <tr>
+        <td><%= zim.name%></td>
+        <td><%= zim.description%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

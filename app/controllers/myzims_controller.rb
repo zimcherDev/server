@@ -2,6 +2,7 @@ class MyzimsController < ApplicationController
   before_action :set_user, only: [:index]
 
   def index
+     
     subscriptions = @user.subscriptions
     
     @zims = Array.new() 
@@ -14,7 +15,6 @@ class MyzimsController < ApplicationController
       format.html {render action: 'index'}
       format.json {render json: @zims}
     end
-    
   end
   
   private 

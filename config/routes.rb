@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'myzims/index'
+  get 'myzims' => "myzims#index"
 
   resources :subscriptions
 
