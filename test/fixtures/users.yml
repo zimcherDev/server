@@ -11,3 +11,9 @@ two:
   email: MyString
   image_url: MyString
   password_digest: <%= BCrypt::Password.create('secret') %>
+  
+allen:
+  name: Allen
+  email: allen@gmail.com
+  image_url: allen.jpg
+  password_digest: <%= BCrypt::Password.create('secret') %>
