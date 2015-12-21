@@ -29,7 +29,7 @@ class ZimsController < ApplicationController
     respond_to do |format|
       if @zim.save
         format.html { redirect_to @zim, notice: 'Zim was successfully created.' }
-        format.json { render :show, status: :created, location: @zim }
+        format.json { render json: @zim, status: :created}
       else
         format.html { render :new }
         format.json { render json: @zim.errors, status: :unprocessable_entity }
@@ -43,7 +43,7 @@ class ZimsController < ApplicationController
     respond_to do |format|
       if @zim.update(zim_params)
         format.html { redirect_to @zim, notice: 'Zim was successfully updated.' }
-        format.json { render :show, status: :ok, location: @zim }
+        format.json { render json: @zim, status: :ok}
       else
         format.html { render :edit }
         format.json { render json: @zim.errors, status: :unprocessable_entity }

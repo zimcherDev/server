@@ -13,7 +13,7 @@ class MyzimsController < ApplicationController
     
     respond_to do |format|
       format.html {render action: 'index'}
-      format.json {render json: @zims}
+      format.json {render json: @zims,status: :ok}
     end
   end
   
