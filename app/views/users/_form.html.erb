@@ -35,3 +35,9 @@
   </div>
   </fieldset>
 <% end %>
+
+<%= form_tag({action: :upload}, multipart: true) do %>
+    <%= text_field_tag :id, params[:id]%>
+    <%= file_field_tag 'picture' %>
+    <div><%= submit_tag 'Save' %></div>
+<% end %>

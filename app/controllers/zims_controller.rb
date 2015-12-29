@@ -10,6 +10,21 @@ class ZimsController < ApplicationController
   # GET /zims/1
   # GET /zims/1.json
   def show
+    response = {
+      :name => @zim.name,
+      :description => @zim.description,
+      :image_url => @zim.image_url,
+      :publicity => @zim.publicity,
+      :num_members => @zim.subscriptions.count,
+      :num_posts => @zim.posts.count,
+      :posts => @zim.posts  
+    }
+    
+    respond_to do |format|
+      format.html {render json: response,status: :ok}
+      format.json {render json: response,status: :ok}
+    end
+    
   end
 
   # GET /zims/new

@@ -14,7 +14,7 @@
   <tbody>
     <% @zims.each do |zim| %>
       <tr>
-        <td><%= zim.name%></td>
+        <td><%= link_to zim.name, zim%></td>
         <td><%= zim.description%></td>
       </tr>
     <% end %>
@@ -22,4 +22,6 @@
 </table>
 <div>
   <%= link_to 'My Profile', edit_user_path(@user) %>
+  <%= link_to 'Create a Zim', new_zim_path %>
 </div>
+

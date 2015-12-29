@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :upload]
+  require 'aws-sdk'
   # GET /users
   # GET /users.json
   def index
@@ -34,6 +35,29 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # POST /users/upload
+  def upload
+    uploaded_io = params[:picture]
+    s3 = Aws::S3::Resource.new(
+      credentials: Aws::Credentials.new('AKIAJAE7VUWCVE6MJZTA ', 'IKIwmRHirTwvre4OacyNJgNXntSv3tKZSNxxSeTZ'),
+      region: 'us-west-2')
+           
+    obj = s3.bucket('zimcher').object("usersimages/#{@user.id}")
+    obj.put(body: uploaded_io)
+    @user.image_url = obj.public_url
+   
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to users_url, notice: "User #{@user.name} was successfully updated." }
+        format.json { render json: @user, status: :ok }
+      else
+        format.html { render :edit }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+     
   end
 
   # PATCH/PUT /users/1

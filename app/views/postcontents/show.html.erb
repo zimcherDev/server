@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @postcontent.description %>
+</p>
+
+<p>
+  <strong>Media url:</strong>
+  <%= @postcontent.media_url %>
+</p>
+
+<p>
+  <strong>Media type:</strong>
+  <%= @postcontent.media_type %>
+</p>
+
+<p>
+  <strong>Post:</strong>
+  <%= @postcontent.post %>
+</p>
+
+<%= link_to 'Edit', edit_postcontent_path(@postcontent) %> |
+<%= link_to 'Back', postcontents_path %>

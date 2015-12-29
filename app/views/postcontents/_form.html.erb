@@ -1,0 +1,33 @@
+<%= form_for(@postcontent) do |f| %>
+  <% if @postcontent.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@postcontent.errors.count, "error") %> prohibited this postcontent from being saved:</h2>
+
+      <ul>
+      <% @postcontent.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :media_url %><br>
+    <%= f.text_area :media_url %>
+  </div>
+  <div class="field">
+    <%= f.label :media_type %><br>
+    <%= f.text_field :media_type %>
+  </div>
+  <div class="field">
+    <%= f.label :post_id %><br>
+    <%= f.text_field :post_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

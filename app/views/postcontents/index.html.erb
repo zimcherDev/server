@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Postcontents</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Media url</th>
+      <th>Media type</th>
+      <th>Post</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @postcontents.each do |postcontent| %>
+      <tr>
+        <td><%= postcontent.description %></td>
+        <td><%= postcontent.media_url %></td>
+        <td><%= postcontent.media_type %></td>
+        <td><%= postcontent.post %></td>
+        <td><%= link_to 'Show', postcontent %></td>
+        <td><%= link_to 'Edit', edit_postcontent_path(postcontent) %></td>
+        <td><%= link_to 'Destroy', postcontent, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Postcontent', new_postcontent_path %>

@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  resources :posts
+
+  resources :replies
+
+  resources :postcontents
+
   get 'myzims' => "myzims#index"
 
   resources :subscriptions
@@ -7,6 +13,7 @@ Rails.application.routes.draw do
   resources :zims
 
   get 'admin' => 'admin#index'
+  post 'users/upload'
 
   controller :sessions do
     get 'login' => :new
