@@ -10,7 +10,7 @@ class ZimsController < ApplicationController
   # GET /zims/1
   # GET /zims/1.json
   def show
-    response = {
+    @response = {
       :name => @zim.name,
       :description => @zim.description,
       :image_url => @zim.image_url,
@@ -21,8 +21,8 @@ class ZimsController < ApplicationController
     }
     
     respond_to do |format|
-      format.html {render json: response,status: :ok}
-      format.json {render json: response,status: :ok}
+      format.html {render action: 'show'}
+      format.json {render json: @response,status: :ok}
     end
     
   end
@@ -39,10 +39,28 @@ class ZimsController < ApplicationController
   # POST /zims
   # POST /zims.json
   def create
-    @zim = Zim.new(zim_params)
+    
+    @zim = Zim.new
+   
+    @zim.name = zim_params[:name]
+    @zim.description = zim_params[:description]
+    @zim.publicity = zim_params[:publicity]
 
     respond_to do |format|
       if @zim.save
+      
+        if zim_params[:picture]
+          uploaded_io = zim_params[:picture]
+          s3 = Aws::S3::Resource.new(
+            credentials: Aws::Credentials.new('AKIAJAE7VUWCVE6MJZTA ', 'IKIwmRHirTwvre4OacyNJgNXntSv3tKZSNxxSeTZ'),
+            region: 'us-west-2')
+            
+          obj = s3.bucket('zimcher').object("zimssimages/#{@zim.id}")
+          obj.put(body: uploaded_io)
+          @zim.image_url = obj.public_url
+          @zim.save
+        end
+        
         format.html { redirect_to @zim, notice: 'Zim was successfully created.' }
         format.json { render json: @zim, status: :created}
       else
@@ -55,8 +73,24 @@ class ZimsController < ApplicationController
   # PATCH/PUT /zims/1
   # PATCH/PUT /zims/1.json
   def update
+  
+    if zim_params[:picture]
+      uploaded_io = zim_params[:picture]
+      s3 = Aws::S3::Resource.new(
+        credentials: Aws::Credentials.new('AKIAJAE7VUWCVE6MJZTA ', 'IKIwmRHirTwvre4OacyNJgNXntSv3tKZSNxxSeTZ'),
+        region: 'us-west-2')
+            
+      obj = s3.bucket('zimcher').object("zimsimages/#{@zim.id}")
+      obj.put(body: uploaded_io)
+      @zim.image_url = obj.public_url
+    end
+    
+    @zim.name = zim_params[:name]
+    @zim.description = zim_params[:description]
+    @zim.publicity = zim_params[:publicity]
+    
     respond_to do |format|
-      if @zim.update(zim_params)
+      if @zim.save
         format.html { redirect_to @zim, notice: 'Zim was successfully updated.' }
         format.json { render json: @zim, status: :ok}
       else
@@ -84,6 +118,6 @@ class ZimsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def zim_params
-      params.require(:zim).permit(:name, :description, :image_url, :publicity)
+      params.require(:zim).permit(:name, :description, :picture, :publicity)
     end
 end

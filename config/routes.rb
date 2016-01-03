@@ -1,19 +1,22 @@
 Rails.application.routes.draw do
 
+  resources :users
+  
   resources :posts
 
   resources :replies
 
   resources :postcontents
-
-  get 'myzims' => "myzims#index"
-
+  
   resources :subscriptions
 
   resources :zims
 
+  get 'myzims/:id',to: 'myzims#index', as: 'myzim'
+
   get 'admin' => 'admin#index'
-  post 'users/upload'
+  
+  post 'users/uploadImage'
 
   controller :sessions do
     get 'login' => :new
@@ -22,7 +25,7 @@ Rails.application.routes.draw do
   end
   
   root "sessions#new"
-  resources :users
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

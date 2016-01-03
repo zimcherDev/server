@@ -1,4 +1,6 @@
 class SubscriptionsController < ApplicationController
+  include CurrentUser
+  before_action :set_user, only: [:create]
   before_action :set_subscription, only: [:show, :edit, :update, :destroy]
 
   # GET /subscriptions
@@ -24,11 +26,13 @@ class SubscriptionsController < ApplicationController
   # POST /subscriptions
   # POST /subscriptions.json
   def create
-    @subscription = Subscription.new(subscription_params)
+  
+    zim = Zim.find(params[:zim_id])
+    @subscription = @user.subscriptions.build(zim: zim)
 
     respond_to do |format|
       if @subscription.save
-        format.html { redirect_to @subscription, notice: 'Subscription was successfully created.' }
+        format.html { redirect_to zims_path, notice: 'Subscription was successfully created.' }
         format.json { render :show, status: :created, location: @subscription }
       else
         format.html { render :new }

@@ -1,24 +1,15 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @zim.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @zim.description %>
-</p>
-
-<p>
-  <strong>Image url:</strong>
-  <%= @zim.image_url %>
-</p>
-
-<p>
-  <strong>Publicity:</strong>
-  <%= @zim.publicity %>
-</p>
-
-<%= link_to 'Edit', edit_zim_path(@zim) %> |
-<%= link_to 'Back', zims_path %>
+<table>
+  <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+    <td>
+      <%= image_tag(@response[:image_url], class: 'list_image') %>
+    </td>
+    <td class="list_description">
+      <dl>
+        <dt><%= @response[:name] %></dt>
+        <dd><%= @response[:num_members] %>Members <%= @response[:num_posts] %>Posts <%= @response[:publicity]%>
+        <dd><%= truncate(strip_tags(@response[:description]), length: 80) %></dd>
+      </dl>
+    </td>
+  </tr>
+</table>

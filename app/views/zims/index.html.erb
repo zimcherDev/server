@@ -1,33 +1,26 @@
 <p id="notice"><%= notice %></p>
-
 <h1>Listing Zims</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Image url</th>
-      <th>Publicity</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @zims.each do |zim| %>
-      <tr>
-        <td><%= zim.name %></td>
-        <td><%= zim.description %></td>
-        <td><%= zim.image_url %></td>
-        <td><%= zim.publicity %></td>
-        <td><%= link_to 'Show', zim %></td>
-        <td><%= link_to 'Edit', edit_zim_path(zim) %></td>
-        <td><%= link_to 'Destroy', zim, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+<table>
+<% @zims.each do |zim| %>
+  <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+    <td>
+      <%= image_tag(zim.image_url, class: 'list_image') %>
+    </td>
+    <td class="list_description">
+      <dl>
+        <dt><%= zim.name %></dt>
+        <dd><%= truncate(strip_tags(zim.description), length: 80) %></dd>
+      </dl>
+    </td>
+    <td class="list_actions">
+      <%= link_to 'Show', zim %><br/>
+      <%= button_to 'Subscirbe', subscriptions_path(zim_id: zim.id) %><br/>
+    </td>
+  </tr>
+<% end %>
 </table>
 
-<br>
 
-<%= link_to 'New Zim', new_zim_path %>
+
