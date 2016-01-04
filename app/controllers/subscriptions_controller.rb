@@ -35,7 +35,7 @@ class SubscriptionsController < ApplicationController
         format.html { redirect_to zims_path, notice: 'Subscription was successfully created.' }
         format.json { render :show, status: :created, location: @subscription }
       else
-        format.html { render :new }
+        format.html { redirect_to zims_path ,notice: 'You have subscribed this zim'}
         format.json { render json: @subscription.errors, status: :unprocessable_entity }
       end
     end
