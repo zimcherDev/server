@@ -1,6 +1,6 @@
 class ZimsController < ApplicationController
   include CurrentUser
-  before_action :set_user, only: [:index]
+  before_action :set_user, only: [:index, :create]
   before_action :set_zim, only: [:show, :edit, :update, :destroy]
 
   # GET /zims
@@ -63,7 +63,7 @@ class ZimsController < ApplicationController
           @zim.save
         end
         
-        format.html { redirect_to @zim, notice: 'Zim was successfully created.' }
+        format.html { redirect_to myzim_path(id: @user), notice: 'Zim was successfully created.' }
         format.json { render json: @zim, status: :created}
       else
         format.html { render :new }
