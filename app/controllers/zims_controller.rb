@@ -1,6 +1,6 @@
 class ZimsController < ApplicationController
   include CurrentUser
-  before_action :set_user, only: [:index, :create]
+  before_action :set_user, only: [:index]
   before_action :set_zim, only: [:show, :edit, :update, :destroy]
 
   # GET /zims
