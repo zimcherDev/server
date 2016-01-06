@@ -1,6 +1,6 @@
 class ZimsController < ApplicationController
   include CurrentUser
-  #before_action :set_user, only: [:index]
+  before_action :set_user, only: [:index,:create]
   before_action :set_zim, only: [:show, :edit, :update, :destroy]
 
   # GET /zims
@@ -46,7 +46,6 @@ class ZimsController < ApplicationController
    
     @zim.name = zim_params[:name]
     @zim.description = zim_params[:description]
-    @zim.publicity = zim_params[:publicity]
 
     respond_to do |format|
       if @zim.save
@@ -89,7 +88,6 @@ class ZimsController < ApplicationController
     
     @zim.name = zim_params[:name]
     @zim.description = zim_params[:description]
-    @zim.publicity = zim_params[:publicity]
     
     respond_to do |format|
       if @zim.save
@@ -120,6 +118,6 @@ class ZimsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def zim_params
-      params.require(:zim).permit(:name, :description, :picture, :publicity)
+      params.require(:zim).permit(:name, :description, :picture)
     end
 end
