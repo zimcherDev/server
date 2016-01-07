@@ -13,8 +13,9 @@ class SearchController < ApplicationController
       users.each do |user|
         @response.push(user)
       end
-    else if keywords == 'zim'
+    elsif keywords == 'zim'
       zims = Zim.where("name like ?","%#{phrase}%")
+      
       users.each do |user|
         @response.push(user)
       end
@@ -25,6 +26,5 @@ class SearchController < ApplicationController
       format.json {render json: @response,status: :ok}
     end    
   end
-  
   
 end
