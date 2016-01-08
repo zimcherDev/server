@@ -11,13 +11,25 @@ class SearchController < ApplicationController
     if keywords == 'people'
       users = User.where("name like ?","%#{phrase}%")
       users.each do |user|
-        @response.push(user)
+        user_info = {
+          :name => user.name
+          :image_url => user.image_url
+          :num_posts => user.posts.count
+        }
+        @response.push(user_info)
       end
     elsif keywords == 'zim'
       zims = Zim.where("name like ?","%#{phrase}%")
       
-      users.each do |user|
-        @response.push(user)
+      zims.each do |zim|
+        zim_info = {
+          :name => zim.name
+          :description => zim.description
+          :image_url => zim.image_url
+          :num_members => zim.subscription.count
+          :num_posts => zim.posts.count
+        }
+        @response.push(zim_info)
       end
     end
     
