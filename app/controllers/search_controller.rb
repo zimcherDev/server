@@ -26,7 +26,7 @@ class SearchController < ApplicationController
           :name => zim.name,
           :description => zim.description,
           :image_url => zim.image_url,
-          :num_members => zim.subscription.count,
+          :num_members => zim.subscriptions.count,
           :num_posts => zim.posts.count
         }
         @response.push(zim_info)
