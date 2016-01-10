@@ -1,2 +1,12 @@
-<h1>Search#create</h1>
-<p>Find me in app/views/search/create.html.erb</p>
+<%= form_tag('/search') do%>
+  <div>
+    <%= text_field_tag 'phrase', params[:phrase]%>
+  </div>
+  <div>
+    <%= select_tag "credit_card", options_for_select([ "zim", "people" ], "zim"), params[:keyword]%>    
+  </div>
+  <div>
+    <%= submit_tag "Search"%>  
+  </div>
+<% end %>
+

@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'search/index'
-
-  post 'search/create'
-
   resources :users
   
   resources :posts
@@ -20,8 +16,10 @@ Rails.application.routes.draw do
 
   get 'admin' => 'admin#index'
   
-  post 'users/uploadImage'
-
+  get 'search' => 'search#index', as:'search'
+  
+  post 'search' => 'search#create'
+  
   controller :sessions do
     get 'login' => :new
     post 'login' => :create

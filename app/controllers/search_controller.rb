@@ -1,15 +1,16 @@
 class SearchController < ApplicationController
   def index
+    @response = params[:response]
   end
 
   def create
   
-    keywords = params[:keywords]
-    phrase = params[:phrase]
+    object = params[:object]
+    keyword = params[:keyword]
     @response = Array.new()
     
-    if keywords == 'people'
-      users = User.where("name like ?","%#{phrase}%")
+    if object == 'people'
+      users = User.where("name like ?","%#{keyword}%")
       users.each do |user|
         user_info = {
           :name => user.name,
@@ -18,8 +19,8 @@ class SearchController < ApplicationController
         }
         @response.push(user_info)
       end
-    elsif keywords == 'zim'
-      zims = Zim.where("name like ?","%#{phrase}%")
+    elsif object == 'zim'
+      zims = Zim.where("name like ?","%#{keyword}%")
       
       zims.each do |zim|
         zim_info = {
