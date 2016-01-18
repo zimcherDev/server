@@ -77,7 +77,7 @@ class UsersController < ApplicationController
     
     respond_to do |format|
       if @user.save
-        format.html { redirect_to users_url, notice: "User #{@user.name} was successfully updated." }
+        format.html { redirect_to myzim_path(id: @user), notice: "User #{@user.name} was successfully updated." }
         format.json { render json: @user, status: :ok }
       else
         format.html { render :edit }

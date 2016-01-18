@@ -16,7 +16,9 @@ Rails.application.routes.draw do
 
   get 'admin' => 'admin#index'
   
-  get 'search' => 'search#index', as:'search'
+  get 'search' => 'search#index'
+  
+  get 'search/result'
   
   post 'search' => 'search#create'
   

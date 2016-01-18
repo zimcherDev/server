@@ -1,0 +1,16 @@
+
+<% if @response %>
+  <table class='table'>
+    <% @response.each do |object| %>
+      <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+      <td>
+        <%= image_tag(object[:image_url], class: 'list_image') %>
+      </td>
+      <td class="list_description">
+         <%= object[:name] %>
+        </dl>
+      </td>
+    </tr>
+   <% end %>
+  </table>
+<% end %>
