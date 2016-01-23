@@ -9,6 +9,12 @@
 
       <%= label_tag :password, 'Passowrd' %>
       <%= password_field_tag :password, params[:password],class: 'form-control' %>
+      
+      
+      <label class="checkbox inline" %>
+        <%= check_box_tag :remember_me,params[:remember] %>
+        <span>Remember me on this computer</span>
+      </label>
 
       <%= submit_tag "Log in", class: "btn btn-primary" %>
     <% end %>

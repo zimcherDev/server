@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     delete 'logout' => :destroy
   end
   
-  root "sessions#new"
+  root "sessions#new", as: 'zimcher'
   
 
   # The priority is based upon order of creation: first created -> highest priority.

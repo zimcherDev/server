@@ -2,8 +2,8 @@
 <div class="container">
   <div class="col-md-6 col-md-offset-3">
     <%= form_tag('/search') do%>
-      <div>
-        <%= text_field_tag 'keyword', params[:keyword]%>
+      <div class="form-inline">
+        <%= text_field_tag 'keyword', params[:keyword]%><%= submit_tag "Search",class: "btn btn-primary"%>  
       </div>
       
       <label class="radio-inline"><%= radio_button_tag :object,  "zim",params[:object] %>Zim</label> 

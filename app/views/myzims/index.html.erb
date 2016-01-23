@@ -1,4 +1,4 @@
-<h1>My Zims</h1>
+Welcome <%=@user.name %> <%=button_to 'Logout', logout_path, method: :delete ,class: "btn btn-primary"%>
 
 <table class="table">
 <% @zims.each do |zim| %>
